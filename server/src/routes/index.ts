@@ -4,6 +4,8 @@ import { createUserRoutes } from './userRoutes'
 import healthRoutes from './healthRoutes'
 import githubRoutes from './githubRoutes'
 import csvRoutes from './csvRoutes'
+import dashboardRoutes from './dashboardRoutes'
+import exportRoutes from './exportRoutes'
 
 // 모든 라우트 등록
 export const createRoutes = (context: AppContext) => async (fastify: FastifyInstance) => {
@@ -18,4 +20,10 @@ export const createRoutes = (context: AppContext) => async (fastify: FastifyInst
 
   // CSV 내보내기 관련 라우트
   fastify.register(csvRoutes, { prefix: '/api/csv' })
+
+  // 대시보드 관련 라우트
+  fastify.register(dashboardRoutes, { prefix: '/api/v1/statistics' })
+
+  // CSV 내보내기 관련 라우트 (대시보드 데이터)
+  fastify.register(exportRoutes, { prefix: '/api/v1/export' })
 }

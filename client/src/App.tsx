@@ -6,12 +6,14 @@ import UserDetailPage from './routes/UserDetailPage'
 import CreateUserPage from './routes/CreateUserPage'
 import EditUserPage from './routes/EditUserPage'
 import NotFoundPage from './routes/NotFoundPage'
+import DashboardPage from './routes/DashboardPage'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="dashboard" element={<DashboardPage />} />
         <Route path="users">
           <Route index element={<UsersPage />} />
           <Route path="new" element={<CreateUserPage />} />
