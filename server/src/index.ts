@@ -53,7 +53,8 @@ async function start() {
     try {
       console.log('통계 CSV 파일 생성 중...')
       const releases = await githubService.fetchAllReleases()
-      const csvFiles = await csvService.generateAllCsvFiles(releases)
+      const releaseDetails = await githubService.fetchAllReleaseDetails()
+      const csvFiles = await csvService.generateAllCsvFiles(releases, releaseDetails)
       console.log('통계 CSV 파일 생성 완료:', csvFiles)
     } catch (error) {
       console.error('통계 CSV 파일 생성 중 오류 발생:', error)

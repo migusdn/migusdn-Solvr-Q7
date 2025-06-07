@@ -1,0 +1,339 @@
+repository_name,release_id,tag_name,release_name,html_url,is_draft,is_prerelease,created_at,published_at,author_login,author_type,body_content,target_commitish,assets_count,tarball_url,zipball_url,published_year,published_month,published_day,published_week,body_length
+stackflow,221756397,@stackflow/react-ui-core@1.3.2,@stackflow/react-ui-core@1.3.2,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react-ui-core%401.3.2,false,false,2025-05-29T08:08:55Z,2025-05-29T08:08:59Z,github-actions[bot],User,"### Patch Changes
+
+-   d2c50f3: fix(react-ui-core): add `preventSwipeBack` into effect dependencies
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react-ui-core@1.3.2,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react-ui-core@1.3.2,2025,5,29,21,100
+stackflow,221756390,@stackflow/plugin-basic-ui@1.14.2,@stackflow/plugin-basic-ui@1.14.2,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.14.2,false,false,2025-05-29T08:08:55Z,2025-05-29T08:08:56Z,github-actions[bot],User,"### Patch Changes
+
+-   371a39c: fix(plugin-basic-ui): update dependencies
+-   Updated dependencies [d2c50f3]
+    -   @stackflow/react-ui-core@1.3.2
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.14.2,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.14.2,2025,5,29,21,148
+stackflow,218765570,@stackflow/react-ui-core@1.3.1,@stackflow/react-ui-core@1.3.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react-ui-core%401.3.1,false,false,2025-05-15T09:07:58Z,2025-05-15T09:08:02Z,github-actions[bot],User,"### Patch Changes
+
+-   aef952a: fix(react-ui-core): prevent default `touchend` event
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react-ui-core@1.3.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react-ui-core@1.3.1,2025,5,15,19,85
+stackflow,218765559,@stackflow/plugin-basic-ui@1.14.1,@stackflow/plugin-basic-ui@1.14.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.14.1,false,false,2025-05-15T09:07:58Z,2025-05-15T09:07:59Z,github-actions[bot],User,"### Patch Changes
+
+-   aef952a: fix(plugin-basic-ui): prevent touch events while transitioning for other basic components
+-   Updated dependencies [aef952a]
+    -   @stackflow/react-ui-core@1.3.1
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.14.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.14.1,2025,5,15,19,196
+stackflow,217906393,@stackflow/react@1.5.2,@stackflow/react@1.5.2,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react%401.5.2,false,false,2025-05-12T07:52:16Z,2025-05-12T07:52:17Z,github-actions[bot],User,"### Patch Changes
+
+-   b9dc68a: fix(react): remove unused dependencies
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react@1.5.2,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react@1.5.2,2025,5,12,19,71
+stackflow,211240605,@stackflow/react-ui-core@1.3.0,@stackflow/react-ui-core@1.3.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react-ui-core%401.3.0,false,false,2025-04-09T10:08:18Z,2025-04-09T10:08:22Z,github-actions[bot],User,"### Minor Changes
+
+-   a7650d4: Support full screen gradient background and introduce new app bar entrance type ""cover""
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react-ui-core@1.3.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react-ui-core@1.3.0,2025,4,9,14,120
+stackflow,211240595,@stackflow/plugin-basic-ui@1.14.0,@stackflow/plugin-basic-ui@1.14.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.14.0,false,false,2025-04-09T10:08:18Z,2025-04-09T10:08:19Z,github-actions[bot],User,"### Minor Changes
+
+-   a7650d4: Support full screen gradient background and introduce new app bar entrance type ""cover""
+
+### Patch Changes
+
+-   Updated dependencies [a7650d4]
+    -   @stackflow/react-ui-core@1.3.0
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.14.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.14.0,2025,4,9,14,214
+stackflow,208587923,@stackflow/react-ui-core@1.2.3,@stackflow/react-ui-core@1.2.3,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react-ui-core%401.2.3,false,false,2025-03-27T06:55:21Z,2025-03-27T06:55:24Z,github-actions[bot],User,"### Patch Changes
+
+-   5c4b96c: fix(react-ui-core): consider nullable stack
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react-ui-core@1.2.3,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react-ui-core@1.2.3,2025,3,27,12,76
+stackflow,208587919,@stackflow/plugin-basic-ui@1.13.1,@stackflow/plugin-basic-ui@1.13.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.13.1,false,false,2025-03-27T06:55:21Z,2025-03-27T06:55:22Z,github-actions[bot],User,"### Patch Changes
+
+-   5c4b96c: fix(react-ui-core): consider nullable stack
+-   Updated dependencies [5c4b96c]
+    -   @stackflow/react-ui-core@1.2.3
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.13.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.13.1,2025,3,27,12,150
+stackflow,205775211,@stackflow/react-ui-core@1.2.2,@stackflow/react-ui-core@1.2.2,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react-ui-core%401.2.2,false,false,2025-03-14T06:58:30Z,2025-03-14T06:58:35Z,github-actions[bot],User,"### Patch Changes
+
+-   8593b5a: fix(plugin-basic-ui,react-ui-core): prevent touch events while transitioning
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react-ui-core@1.2.2,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react-ui-core@1.2.2,2025,3,14,10,109
+stackflow,205775206,@stackflow/plugin-basic-ui@1.13.0,@stackflow/plugin-basic-ui@1.13.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.13.0,false,false,2025-03-14T06:58:30Z,2025-03-14T06:58:32Z,github-actions[bot],User,"### Minor Changes
+
+-   91413b6: To support various background designs, enable users to configure the background-image option in AppScreen, AppBar, BottomSheet and Modal.
+
+### Patch Changes
+
+-   8593b5a: fix(plugin-basic-ui,react-ui-core): prevent touch events while transitioning
+-   Updated dependencies [8593b5a]
+    -   @stackflow/react-ui-core@1.2.2
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.13.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.13.0,2025,3,14,10,354
+stackflow,202012520,@stackflow/react@1.5.1,@stackflow/react@1.5.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react%401.5.1,false,false,2025-02-24T11:45:05Z,2025-02-24T11:45:06Z,github-actions[bot],User,"### Patch Changes
+
+-   7751e60: fix(react): pause lazy component transition when no loader defined
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react@1.5.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react@1.5.1,2025,2,24,8,99
+stackflow,200295634,@stackflow/react@1.5.0,@stackflow/react@1.5.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react%401.5.0,false,false,2025-02-14T02:06:53Z,2025-02-14T02:06:57Z,github-actions[bot],User,"### Minor Changes
+
+-   cfa7af8: Supports dynamic import for activities, and delays transition effects while loading an activity or waiting for a loader response
+-   82b52b0: Add missing logics of considering `targetActivityId` while updating using update functions.
+-   cfa7af8: The 'update functions' pattern for step push and replace actions is implemented.
+-   cfa7af8: feat(core, react): add `hasZIndex` option in `useStepFlow()`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react@1.5.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react@1.5.0,2025,2,14,6,434
+stackflow,200295637,@stackflow/plugin-basic-ui@1.12.0,@stackflow/plugin-basic-ui@1.12.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.12.0,false,false,2025-02-14T02:06:53Z,2025-02-14T02:07:00Z,github-actions[bot],User,"### Minor Changes
+
+-   cfa7af8: Supports dynamic import for activities, and delays transition effects while loading an activity or waiting for a loader response
+
+### Patch Changes
+
+-   cfa7af8: fix(plugin-basic-ui): assign normalized values to global option provider
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.12.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.12.0,2025,2,14,6,267
+stackflow,200295629,@stackflow/core@1.2.0,@stackflow/core@1.2.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/core%401.2.0,false,false,2025-02-14T02:06:53Z,2025-02-14T02:06:54Z,github-actions[bot],User,"### Minor Changes
+
+-   cfa7af8: Supports dynamic import for activities, and delays transition effects while loading an activity or waiting for a loader response
+-   cfa7af8: feat(core, react): add `hasZIndex` option in `useStepFlow()`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/core@1.2.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/core@1.2.0,2025,2,14,6,235
+stackflow,196072820,@stackflow/react@1.4.2,@stackflow/react@1.4.2,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react%401.4.2,false,false,2025-01-22T12:13:06Z,2025-01-22T12:13:17Z,github-actions[bot],User,"### Patch Changes
+
+-   e323ce3: fix: add `decode()` interface to `Config` and support `path: string[]`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react@1.4.2,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react@1.4.2,2025,1,22,3,103
+stackflow,196072826,@stackflow/plugin-history-sync@1.7.1,@stackflow/plugin-history-sync@1.7.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-history-sync%401.7.1,false,false,2025-01-22T12:13:06Z,2025-01-22T12:13:19Z,github-actions[bot],User,"### Patch Changes
+
+-   e323ce3: fix: add `decode()` interface to `Config` and support `path: string[]`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-history-sync@1.7.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-history-sync@1.7.1,2025,1,22,3,103
+stackflow,196072809,@stackflow/link@1.6.1,@stackflow/link@1.6.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/link%401.6.1,false,false,2025-01-22T12:13:06Z,2025-01-22T12:13:13Z,github-actions[bot],User,"### Patch Changes
+
+-   e323ce3: fix: add `decode()` interface to `Config` and support `path: string[]`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/link@1.6.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/link@1.6.1,2025,1,22,3,103
+stackflow,196072797,@stackflow/core@1.1.1,@stackflow/core@1.1.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/core%401.1.1,false,false,2025-01-22T12:13:06Z,2025-01-22T12:13:10Z,github-actions[bot],User,"### Patch Changes
+
+-   5fc54cb: Made `divideBy` to be friendly to type inference.
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/core@1.1.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/core@1.1.1,2025,1,22,3,82
+stackflow,196072781,@stackflow/config@1.2.1,@stackflow/config@1.2.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/config%401.2.1,false,false,2025-01-22T12:13:06Z,2025-01-22T12:13:08Z,github-actions[bot],User,"### Patch Changes
+
+-   e323ce3: fix: add `decode()` interface to `Config` and support `path: string[]`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/config@1.2.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/config@1.2.1,2025,1,22,3,103
+stackflow,191425119,@stackflow/react-ui-core@1.2.1,@stackflow/react-ui-core@1.2.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react-ui-core%401.2.1,false,false,2024-12-18T12:25:59Z,2024-12-18T12:26:00Z,github-actions[bot],User,"### Patch Changes
+
+-   48693e7: feat(react-ui-core): add swipe back ratio css var in other activity roots and add `transitionend` state in `useStyleEffectSwipeBack()`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react-ui-core@1.2.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react-ui-core@1.2.1,2024,12,18,51,167
+stackflow,191372336,@stackflow/react-ui-core@1.2.0,@stackflow/react-ui-core@1.2.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react-ui-core%401.2.0,false,false,2024-12-18T07:57:51Z,2024-12-18T07:57:55Z,github-actions[bot],User,"### Minor Changes
+
+-   dc35bfc: feat(react-ui-core, plugin-basic-ui): add `onSwipe*` hooks and add data attributes and css variables
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react-ui-core@1.2.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react-ui-core@1.2.0,2024,12,18,51,133
+stackflow,191454765,@stackflow/plugin-basic-ui@1.11.1,@stackflow/plugin-basic-ui@1.11.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.11.1,false,false,2024-12-18T14:29:35Z,2024-12-18T14:29:36Z,github-actions[bot],User,"### Patch Changes
+
+-   151631b: chore(plugin-basic-ui): update react-ui-core dependency
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.11.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.11.1,2024,12,18,51,88
+stackflow,191372330,@stackflow/plugin-basic-ui@1.11.0,@stackflow/plugin-basic-ui@1.11.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.11.0,false,false,2024-12-18T07:57:51Z,2024-12-18T07:57:52Z,github-actions[bot],User,"### Minor Changes
+
+-   f9f1399: Change to the latest AppBar style
+-   dc35bfc: feat(react-ui-core, plugin-basic-ui): add `onSwipe*` hooks and add data attributes and css variables
+
+### Patch Changes
+
+-   Updated dependencies [dc35bfc]
+    -   @stackflow/react-ui-core@1.2.0
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.11.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.11.0,2024,12,18,51,274
+stackflow,186154740,@stackflow/plugin-basic-ui@1.10.1,@stackflow/plugin-basic-ui@1.10.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-basic-ui%401.10.1,false,false,2024-11-19T10:39:00Z,2024-11-19T10:39:01Z,github-actions[bot],User,"### Patch Changes
+
+-   eb9ed7c: fix(plugin-basic-ui): add `max()` in support query
+-   eb4578f: fix(plugin-basic-ui): add `maxWidth` option in <Modal />
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-basic-ui@1.10.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-basic-ui@1.10.1,2024,11,19,47,153
+stackflow,184272883,@stackflow/link@1.6.0,@stackflow/link@1.6.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/link%401.6.0,false,false,2024-11-08T01:57:25Z,2024-11-08T01:57:26Z,github-actions[bot],User,"### Minor Changes
+
+-   db2aa80: feat(link): disable long press behavior in iOS
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/link@1.6.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/link@1.6.0,2024,11,8,45,79
+stackflow,181365373,@stackflow/react@1.4.1,@stackflow/react@1.4.1,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react%401.4.1,false,false,2024-10-23T05:42:14Z,2024-10-23T05:42:16Z,github-actions[bot],User,"### Patch Changes
+
+-   a4a7366: move `<StackProvider />` up so that `useStack()` can be used in `Plugin.wrapStack`
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react@1.4.1,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react@1.4.1,2024,10,23,43,115
+stackflow,176983643,@stackflow/react@1.4.0,@stackflow/react@1.4.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/react%401.4.0,false,false,2024-09-26T06:24:47Z,2024-09-26T06:24:57Z,github-actions[bot],User,"### Minor Changes
+
+-   7b1780f: feat: Support `<Link />` in Future API
+-   412de46: add `config` property in loader args
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/react@1.4.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/react@1.4.0,2024,9,26,39,121
+stackflow,176983651,@stackflow/plugin-preload@1.4.3,@stackflow/plugin-preload@1.4.3,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-preload%401.4.3,false,false,2024-09-26T06:24:47Z,2024-09-26T06:25:00Z,github-actions[bot],User,"
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-preload@1.4.3,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-preload@1.4.3,2024,9,26,39,1
+stackflow,176983638,@stackflow/plugin-history-sync@1.7.0,@stackflow/plugin-history-sync@1.7.0,https://github.com/daangn/stackflow/releases/tag/%40stackflow/plugin-history-sync%401.7.0,false,false,2024-09-26T06:24:47Z,2024-09-26T06:24:51Z,github-actions[bot],User,"### Minor Changes
+
+-   7b1780f: feat: Support `<Link />` in Future API
+
+### Patch Changes
+
+-   dc26742: fix(plugin-history-sync): replace json-cycle with flatted
+",main,0,https://api.github.com/repos/daangn/stackflow/tarball/@stackflow/plugin-history-sync@1.7.0,https://api.github.com/repos/daangn/stackflow/zipball/@stackflow/plugin-history-sync@1.7.0,2024,9,26,39,162
+seed-design,222380899,@seed-design/webpack-plugin@0.0.30,@seed-design/webpack-plugin@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/webpack-plugin%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:01:52Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [285cb9b]
+    -   @seed-design/css@0.0.30
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/webpack-plugin@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/webpack-plugin@0.0.30,2025,6,2,22,86
+seed-design,222380970,@seed-design/vite-plugin@0.0.30,@seed-design/vite-plugin@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/vite-plugin%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:02:10Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [285cb9b]
+    -   @seed-design/css@0.0.30
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/vite-plugin@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/vite-plugin@0.0.30,2025,6,2,22,86
+seed-design,222380892,@seed-design/stackflow@0.0.30,@seed-design/stackflow@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/stackflow%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:01:49Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [285cb9b]
+    -   @seed-design/css@0.0.30
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/stackflow@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/stackflow@0.0.30,2025,6,2,22,86
+seed-design,222380873,@seed-design/rsbuild-plugin@0.0.30,@seed-design/rsbuild-plugin@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/rsbuild-plugin%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:01:46Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [285cb9b]
+    -   @seed-design/css@0.0.30
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/rsbuild-plugin@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/rsbuild-plugin@0.0.30,2025,6,2,22,86
+seed-design,222380933,@seed-design/react@0.0.30,@seed-design/react@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:02:01Z,github-actions[bot],User,"### Patch Changes
+
+-   4610b5b: PullToRefresh에 disabled prop을 추가합니다.
+
+-   739b6bf: Tabs.Indicator의 width가 첫 렌더링 시 0으로 설정되는 문제를 수정합니다.
+
+    Tabs의 불필요한 리렌더링을 줄입니다.
+
+-   285cb9b: - `ContextualFloatingButton`과 `FloatingActionButton` 컴포넌트를 제공합니다.
+    -   기존의 `Fab` 및 `ExtendedFab`를 deprecate합니다.
+    -   Floating 요소들의 위치를 편리하게 제어하도록 `Float` 유틸리티 컴포넌트를 제공합니다.
+
+-   Updated dependencies [4610b5b]
+
+-   Updated dependencies [739b6bf]
+
+-   Updated dependencies [285cb9b]
+    -   @seed-design/react-pull-to-refresh@0.0.6
+    -   @seed-design/react-tabs@0.0.7
+    -   @seed-design/css@0.0.30
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react@0.0.30,2025,6,2,22,581
+seed-design,222380957,@seed-design/react-tabs@0.0.7,@seed-design/react-tabs@0.0.7,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-tabs%400.0.7,false,false,2025-06-02T10:01:42Z,2025-06-02T10:02:07Z,github-actions[bot],User,"### Patch Changes
+
+-   739b6bf: Tabs.Indicator의 width가 첫 렌더링 시 0으로 설정되는 문제를 수정합니다.
+
+    Tabs의 불필요한 리렌더링을 줄입니다.
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-tabs@0.0.7,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-tabs@0.0.7,2025,6,2,22,111
+seed-design,222380923,@seed-design/react-pull-to-refresh@0.0.6,@seed-design/react-pull-to-refresh@0.0.6,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-pull-to-refresh%400.0.6,false,false,2025-06-02T10:01:42Z,2025-06-02T10:01:58Z,github-actions[bot],User,"### Patch Changes
+
+-   4610b5b: PullToRefresh에 disabled prop을 추가합니다.
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-pull-to-refresh@0.0.6,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-pull-to-refresh@0.0.6,2025,6,2,22,69
+seed-design,222380863,@seed-design/mcp@0.0.30,@seed-design/mcp@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/mcp%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:01:43Z,github-actions[bot],User,"### Patch Changes
+
+-   @seed-design/figma@0.0.30
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/mcp@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/mcp@0.0.30,2025,6,2,22,49
+seed-design,222380913,@seed-design/figma@0.0.30,@seed-design/figma@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/figma%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:01:55Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [285cb9b]
+    -   @seed-design/css@0.0.30
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/figma@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/figma@0.0.30,2025,6,2,22,86
+seed-design,222380944,@seed-design/css@0.0.30,@seed-design/css@0.0.30,https://github.com/daangn/seed-design/releases/tag/%40seed-design/css%400.0.30,false,false,2025-06-02T10:01:42Z,2025-06-02T10:02:04Z,github-actions[bot],User,"### Patch Changes
+
+-   285cb9b: - `ContextualFloatingButton`과 `FloatingActionButton` 컴포넌트를 제공합니다.
+    -   기존의 `Fab` 및 `ExtendedFab`를 deprecate합니다.
+    -   Floating 요소들의 위치를 편리하게 제어하도록 `Float` 유틸리티 컴포넌트를 제공합니다.
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/css@0.0.30,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/css@0.0.30,2025,6,2,22,210
+seed-design,222071806,@seed-design/webpack-plugin@0.0.29,@seed-design/webpack-plugin@0.0.29,https://github.com/daangn/seed-design/releases/tag/%40seed-design/webpack-plugin%400.0.29,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:30Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [116ee2c]
+    -   @seed-design/css@0.0.29
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/webpack-plugin@0.0.29,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/webpack-plugin@0.0.29,2025,5,30,21,86
+seed-design,222071761,@seed-design/vite-plugin@0.0.29,@seed-design/vite-plugin@0.0.29,https://github.com/daangn/seed-design/releases/tag/%40seed-design/vite-plugin%400.0.29,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:21Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [116ee2c]
+    -   @seed-design/css@0.0.29
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/vite-plugin@0.0.29,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/vite-plugin@0.0.29,2025,5,30,21,86
+seed-design,222071673,@seed-design/stackflow@0.0.29,@seed-design/stackflow@0.0.29,https://github.com/daangn/seed-design/releases/tag/%40seed-design/stackflow%400.0.29,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:03Z,github-actions[bot],User,"### Patch Changes
+
+-   29ec9f0: `reactSlot.createSlot is not a function` 오류가 발생하지 않도록, radix-ui/react-slot 버전을 1.2.3으로 수정합니다.
+-   Updated dependencies [116ee2c]
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/css@0.0.29
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/stackflow@0.0.29,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/stackflow@0.0.29,2025,5,30,21,271
+seed-design,222071798,@seed-design/rsbuild-plugin@0.0.29,@seed-design/rsbuild-plugin@0.0.29,https://github.com/daangn/seed-design/releases/tag/%40seed-design/rsbuild-plugin%400.0.29,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:27Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [116ee2c]
+    -   @seed-design/css@0.0.29
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/rsbuild-plugin@0.0.29,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/rsbuild-plugin@0.0.29,2025,5,30,21,86
+seed-design,222071568,@seed-design/react@0.0.29,@seed-design/react@0.0.29,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react%400.0.29,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:36Z,github-actions[bot],User,"### Patch Changes
+
+-   29ec9f0: `reactSlot.createSlot is not a function` 오류가 발생하지 않도록, radix-ui/react-slot 버전을 1.2.3으로 수정합니다.
+-   Updated dependencies [116ee2c]
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/css@0.0.29
+    -   @seed-design/react-primitive@0.0.3
+    -   @seed-design/react-avatar@0.0.4
+    -   @seed-design/react-checkbox@0.0.4
+    -   @seed-design/react-dialog@0.0.5
+    -   @seed-design/react-popover@0.0.7
+    -   @seed-design/react-progress@0.0.4
+    -   @seed-design/react-pull-to-refresh@0.0.5
+    -   @seed-design/react-radio-group@0.0.4
+    -   @seed-design/react-segmented-control@0.0.5
+    -   @seed-design/react-snackbar@0.0.5
+    -   @seed-design/react-switch@0.0.4
+    -   @seed-design/react-tabs@0.0.6
+    -   @seed-design/react-text-field@0.0.4
+    -   @seed-design/react-toggle@0.0.4
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react@0.0.29,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react@0.0.29,2025,5,30,21,825
+seed-design,222071707,@seed-design/react-toggle@0.0.4,@seed-design/react-toggle@0.0.4,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-toggle%400.0.4,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:09Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-toggle@0.0.4,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-toggle@0.0.4,2025,5,30,21,97
+seed-design,222071742,@seed-design/react-text-field@0.0.4,@seed-design/react-text-field@0.0.4,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-text-field%400.0.4,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:15Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-text-field@0.0.4,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-text-field@0.0.4,2025,5,30,21,97
+seed-design,222071753,@seed-design/react-tabs@0.0.6,@seed-design/react-tabs@0.0.6,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-tabs%400.0.6,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:18Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-tabs@0.0.6,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-tabs@0.0.6,2025,5,30,21,97
+seed-design,222071698,@seed-design/react-switch@0.0.4,@seed-design/react-switch@0.0.4,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-switch%400.0.4,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:06Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-switch@0.0.4,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-switch@0.0.4,2025,5,30,21,97
+seed-design,222071610,@seed-design/react-snackbar@0.0.5,@seed-design/react-snackbar@0.0.5,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-snackbar%400.0.5,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:51Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-snackbar@0.0.5,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-snackbar@0.0.5,2025,5,30,21,97
+seed-design,222071588,@seed-design/react-segmented-control@0.0.5,@seed-design/react-segmented-control@0.0.5,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-segmented-control%400.0.5,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:42Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-segmented-control@0.0.5,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-segmented-control@0.0.5,2025,5,30,21,97
+seed-design,222071784,@seed-design/react-radio-group@0.0.4,@seed-design/react-radio-group@0.0.4,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-radio-group%400.0.4,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:24Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-radio-group@0.0.4,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-radio-group@0.0.4,2025,5,30,21,97
+seed-design,222071717,@seed-design/react-pull-to-refresh@0.0.5,@seed-design/react-pull-to-refresh@0.0.5,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-pull-to-refresh%400.0.5,false,false,2025-05-30T12:57:26Z,2025-05-30T12:58:12Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-pull-to-refresh@0.0.5,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-pull-to-refresh@0.0.5,2025,5,30,21,97
+seed-design,222071649,@seed-design/react-progress@0.0.4,@seed-design/react-progress@0.0.4,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-progress%400.0.4,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:57Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-progress@0.0.4,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-progress@0.0.4,2025,5,30,21,97
+seed-design,222071593,@seed-design/react-primitive@0.0.3,@seed-design/react-primitive@0.0.3,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-primitive%400.0.3,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:45Z,github-actions[bot],User,"### Patch Changes
+
+-   29ec9f0: `reactSlot.createSlot is not a function` 오류가 발생하지 않도록, radix-ui/react-slot 버전을 1.2.3으로 수정합니다.
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-primitive@0.0.3,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-primitive@0.0.3,2025,5,30,21,126
+seed-design,222071600,@seed-design/react-popover@0.0.7,@seed-design/react-popover@0.0.7,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-popover%400.0.7,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:48Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-popover@0.0.7,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-popover@0.0.7,2025,5,30,21,97
+seed-design,222071580,@seed-design/react-dialog@0.0.5,@seed-design/react-dialog@0.0.5,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-dialog%400.0.5,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:39Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-dialog@0.0.5,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-dialog@0.0.5,2025,5,30,21,97
+seed-design,222071561,@seed-design/react-checkbox@0.0.4,@seed-design/react-checkbox@0.0.4,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-checkbox%400.0.4,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:33Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-checkbox@0.0.4,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-checkbox@0.0.4,2025,5,30,21,97
+seed-design,222071536,@seed-design/react-avatar@0.0.4,@seed-design/react-avatar@0.0.4,https://github.com/daangn/seed-design/releases/tag/%40seed-design/react-avatar%400.0.4,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:28Z,github-actions[bot],User,"### Patch Changes
+
+-   Updated dependencies [29ec9f0]
+    -   @seed-design/react-primitive@0.0.3
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/react-avatar@0.0.4,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/react-avatar@0.0.4,2025,5,30,21,97
+seed-design,222071620,@seed-design/mcp@0.0.29,@seed-design/mcp@0.0.29,https://github.com/daangn/seed-design/releases/tag/%40seed-design/mcp%400.0.29,false,false,2025-05-30T12:57:26Z,2025-05-30T12:57:54Z,github-actions[bot],User,"### Patch Changes
+
+-   @seed-design/figma@0.0.29
+",dev,0,https://api.github.com/repos/daangn/seed-design/tarball/@seed-design/mcp@0.0.29,https://api.github.com/repos/daangn/seed-design/zipball/@seed-design/mcp@0.0.29,2025,5,30,21,49
