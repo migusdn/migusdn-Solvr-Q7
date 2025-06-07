@@ -158,3 +158,14 @@ pnpm build
 ### GitHub 연동
 - `GET /api/github/repositories`: GitHub 저장소 목록 조회
 - `GET /api/github/releases/:repo`: 특정 저장소의 릴리즈 목록 조회
+
+## 변경 이력 (Change Log)
+
+### v1.0.0 (현재)
+- GitHub 릴리즈 캐싱 로직 추가
+- 대시보드 필터 및 정렬 기능 확장
+- Task4 완료: 릴리즈 통계 기능 개선
+- Task3 완료: 릴리즈 상세 정보 CSV 파일 추가
+- Task2 완료: 대시보드 기본 기능 구현
+- Task1 완료: 프로젝트 초기 설정
+- 초기 커밋: 프로젝트 생성
