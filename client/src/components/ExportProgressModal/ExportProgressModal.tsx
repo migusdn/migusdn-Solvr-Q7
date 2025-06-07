@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { setShowModal, resetExport } from '../../store/export';
+import { RootState } from '../../store';
 
 /**
  * ExportProgressModal component
  */
 const ExportProgressModal: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { exportData, showModal, error } = useAppSelector(state => state.export);
+  const { exportData, showModal, error } = useAppSelector((state: RootState) => state.export);
 
   // Close modal when ESC key is pressed
   useEffect(() => {

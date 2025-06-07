@@ -1,14 +1,15 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { startExport } from '../../store/export';
+import { RootState } from '../../store';
 
 /**
  * ExportButton component
  */
 const ExportButton: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { filters } = useAppSelector(state => state.dashboard);
-  const { loading } = useAppSelector(state => state.export);
+  const { filters } = useAppSelector((state: RootState) => state.dashboard);
+  const { loading } = useAppSelector((state: RootState) => state.export);
 
   /**
    * Handles export button click

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { setFilters, resetFilters, fetchDashboardData } from '../../store/dashboard';
-import { DashboardFilterParams } from '../../types/dashboard';
+import { RootState } from '../../store';
 
 /**
  * Dashboard filters component
  */
 const DashboardFilters: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { filters } = useAppSelector(state => state.dashboard);
+  const { filters } = useAppSelector((state: RootState) => state.dashboard);
 
   /**
    * Handles timeframe change
@@ -57,7 +57,7 @@ const DashboardFilters: React.FC = () => {
   return (
     <div className="bg-white rounded-lg shadow p-6 mb-6">
       <h2 className="text-xl font-semibold mb-4">필터</h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         {/* Timeframe filter */}
         <div>
@@ -76,7 +76,7 @@ const DashboardFilters: React.FC = () => {
             <option value="monthly">월별</option>
           </select>
         </div>
-        
+
         {/* Start date filter */}
         <div>
           <label htmlFor="startDate" className="block text-sm font-medium text-gray-700 mb-1">
@@ -91,7 +91,7 @@ const DashboardFilters: React.FC = () => {
             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
-        
+
         {/* End date filter */}
         <div>
           <label htmlFor="endDate" className="block text-sm font-medium text-gray-700 mb-1">
@@ -107,7 +107,7 @@ const DashboardFilters: React.FC = () => {
           />
         </div>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         {/* Repository filter */}
         <div>
@@ -127,7 +127,7 @@ const DashboardFilters: React.FC = () => {
           </select>
           <p className="text-xs text-gray-500 mt-1">Ctrl 키를 누른 상태로 여러 항목 선택 가능</p>
         </div>
-        
+
         {/* Release type filter - Placeholder for future implementation */}
         <div>
           <label htmlFor="releaseType" className="block text-sm font-medium text-gray-700 mb-1">
@@ -146,7 +146,7 @@ const DashboardFilters: React.FC = () => {
           <p className="text-xs text-gray-500 mt-1">현재 지원되지 않는 기능입니다</p>
         </div>
       </div>
-      
+
       {/* Action buttons */}
       <div className="flex justify-end space-x-4">
         <button

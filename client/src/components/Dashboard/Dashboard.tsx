@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { fetchDashboardData } from '../../store/dashboard';
+import { RootState } from '../../store';
 import DashboardFilters from '../DashboardFilters/DashboardFilters';
 import TimeSeriesChart from '../TimeSeriesChart/TimeSeriesChart';
 import SummaryStats from '../SummaryStats/SummaryStats';
@@ -14,7 +15,7 @@ import ExportProgressModal from '../ExportProgressModal/ExportProgressModal';
  */
 const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { data, filters, loading, error } = useAppSelector(state => state.dashboard);
+  const { data, filters, loading, error } = useAppSelector((state: RootState) => state.dashboard);
 
   // Fetch dashboard data on component mount and when filters change
   useEffect(() => {

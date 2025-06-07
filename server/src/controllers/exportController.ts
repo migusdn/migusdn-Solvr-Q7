@@ -20,7 +20,7 @@ export async function startDashboardExport(
 ) {
   try {
     const params = request.body;
-    
+
     // Validate required parameters
     if (!params.timeframe) {
       return reply.code(400).send({
@@ -29,7 +29,7 @@ export async function startDashboardExport(
         message: 'timeframe is required'
       });
     }
-    
+
     if (!params.exportOptions) {
       return reply.code(400).send({
         success: false,
@@ -37,10 +37,10 @@ export async function startDashboardExport(
         message: 'exportOptions is required'
       });
     }
-    
+
     // Create export job
     const exportData = await exportService.createExportJob(params, params.exportOptions);
-    
+
     return reply.code(200).send({
       success: true,
       data: exportData
@@ -68,10 +68,10 @@ export async function getExportStatus(
 ) {
   try {
     const { exportId } = request.params;
-    
+
     // Get export status
     const exportData = exportService.getExportStatus(exportId);
-    
+
     if (!exportData) {
       return reply.code(404).send({
         success: false,
@@ -79,7 +79,7 @@ export async function getExportStatus(
         message: `Export job with ID ${exportId} not found`
       });
     }
-    
+
     return reply.code(200).send({
       success: true,
       data: exportData
@@ -107,10 +107,10 @@ export async function downloadExportFile(
 ) {
   try {
     const { filename } = request.params;
-    
+
     // Get file path
     const filePath = exportService.getExportFilePath(filename);
-    
+
     if (!filePath) {
       return reply.code(404).send({
         success: false,
@@ -118,11 +118,11 @@ export async function downloadExportFile(
         message: `File ${filename} not found`
       });
     }
-    
+
     // Set headers for file download
     reply.header('Content-Type', 'text/csv');
     reply.header('Content-Disposition', `attachment; filename=${filename}`);
-    
+
     // Stream the file
     const fileStream = fs.createReadStream(filePath);
     return reply.send(fileStream);
@@ -142,15 +142,17 @@ export async function downloadExportFile(
  * @param reply Fastify reply
  */
 export async function cleanupExportFiles(
-  request: FastifyRequest, 
+  request: FastifyRequest<{
+    Querystring: { maxAge?: string }
+  }>, 
   reply: FastifyReply
 ) {
   try {
     // Default to 24 hours
-    const maxAge = request.query?.maxAge ? parseInt(request.query.maxAge as string) : 24 * 60 * 60 * 1000;
-    
+    const maxAge = request.query?.maxAge ? parseInt(request.query.maxAge) : 24 * 60 * 60 * 1000;
+
     exportService.cleanupExportFiles(maxAge);
-    
+
     return reply.code(200).send({
       success: true,
       message: 'Export files cleaned up successfully'

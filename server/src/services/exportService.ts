@@ -35,10 +35,10 @@ export async function createExportJob(
   exportOptions: ExportOptions
 ): Promise<ExportData> {
   ensureExportDirExists();
-  
+
   // Generate a unique ID for this export
   const exportId = uuidv4();
-  
+
   // Create a new export job
   const job: ExportJob = {
     id: exportId,
@@ -48,13 +48,13 @@ export async function createExportJob(
     startTime: Date.now(),
     estimatedTimeRemaining: 30000 // Initial estimate: 30 seconds
   };
-  
+
   // Store the job
   exportJobs.set(exportId, job);
-  
+
   // Start processing the job in the background
   setTimeout(() => processExportJob(exportId), 0);
-  
+
   // Return initial job status
   return {
     exportId,
@@ -74,34 +74,34 @@ async function processExportJob(exportId: string): Promise<void> {
     console.error(`Export job ${exportId} not found`);
     return;
   }
-  
+
   try {
     // Update job status
     job.status = 'processing';
     job.progress = 10;
     exportJobs.set(exportId, job);
-    
+
     // Fetch releases
-    const releases = await import('../services/githubService').then(
+    const releases = await import('../services/githubService.js').then(
       module => module.default.fetchAllReleases()
     );
-    
+
     job.progress = 30;
     exportJobs.set(exportId, job);
-    
+
     // Generate dashboard data based on filters
     const dashboardData = dashboardService.generateDashboardData(releases, job.params);
-    
+
     job.progress = 50;
     exportJobs.set(exportId, job);
-    
+
     // Create CSV file path
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const filePath = path.join(EXPORT_DIR, `dashboard-export-${timestamp}.csv`);
-    
+
     // Prepare data for CSV export
     const csvData: any[] = [];
-    
+
     // Include time series data if requested
     if (job.params.exportOptions.includeTimeSeriesData) {
       dashboardData.timeSeriesData.forEach(item => {
@@ -114,10 +114,10 @@ async function processExportJob(exportId: string): Promise<void> {
         });
       });
     }
-    
+
     job.progress = 70;
     exportJobs.set(exportId, job);
-    
+
     // Include repository breakdown if requested
     if (job.params.exportOptions.includeRepositoryBreakdown) {
       dashboardData.topRepositories.forEach(item => {
@@ -129,7 +129,7 @@ async function processExportJob(exportId: string): Promise<void> {
         });
       });
     }
-    
+
     // Include release type breakdown if requested
     if (job.params.exportOptions.includeReleaseTypeBreakdown) {
       dashboardData.releaseTypeBreakdown.forEach(item => {
@@ -141,10 +141,10 @@ async function processExportJob(exportId: string): Promise<void> {
         });
       });
     }
-    
+
     job.progress = 80;
     exportJobs.set(exportId, job);
-    
+
     // Write CSV file
     const csvWriter = createObjectCsvWriter({
       path: filePath,
@@ -159,19 +159,19 @@ async function processExportJob(exportId: string): Promise<void> {
         { id: 'percentage', title: 'Percentage' }
       ]
     });
-    
+
     await csvWriter.writeRecords(csvData);
-    
+
     // Update job status to completed
     job.status = 'completed';
     job.progress = 100;
     job.estimatedTimeRemaining = 0;
     job.downloadUrl = `/api/v1/export/download/${path.basename(filePath)}`;
     exportJobs.set(exportId, job);
-    
+
   } catch (error: any) {
     console.error(`Error processing export job ${exportId}:`, error.message);
-    
+
     // Update job status to failed
     job.status = 'failed';
     job.error = error.message;
@@ -189,14 +189,14 @@ export function getExportStatus(exportId: string): ExportData | null {
   if (!job) {
     return null;
   }
-  
+
   // Calculate estimated time remaining based on progress
   if (job.status === 'processing') {
     const elapsedTime = Date.now() - job.startTime;
     const estimatedTotalTime = (elapsedTime / job.progress) * 100;
     job.estimatedTimeRemaining = Math.max(0, estimatedTotalTime - elapsedTime);
   }
-  
+
   return {
     exportId: job.id,
     status: job.status,
@@ -214,7 +214,7 @@ export function getExportStatus(exportId: string): ExportData | null {
  */
 export function getExportFilePath(filename: string): string | null {
   const filePath = path.join(EXPORT_DIR, filename);
-  
+
   // Check if file exists and is within the export directory
   if (
     fs.existsSync(filePath) && 
@@ -223,7 +223,7 @@ export function getExportFilePath(filename: string): string | null {
   ) {
     return filePath;
   }
-  
+
   return null;
 }
 
@@ -233,14 +233,14 @@ export function getExportFilePath(filename: string): string | null {
  */
 export function cleanupExportFiles(maxAgeMs = 24 * 60 * 60 * 1000): void {
   ensureExportDirExists();
-  
+
   const now = Date.now();
   const files = fs.readdirSync(EXPORT_DIR);
-  
+
   files.forEach(file => {
     const filePath = path.join(EXPORT_DIR, file);
     const stats = fs.statSync(filePath);
-    
+
     if (now - stats.mtimeMs > maxAgeMs) {
       fs.unlinkSync(filePath);
     }

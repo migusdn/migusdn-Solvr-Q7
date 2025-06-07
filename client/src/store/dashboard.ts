@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction, ActionReducerMapBuilder } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { 
   DashboardData, 
@@ -48,13 +48,13 @@ export const fetchDashboardData = createAsyncThunk<
   { rejectValue: string }
 >(
   'dashboard/fetchData',
-  async (params, { rejectWithValue }) => {
+  async (params: DashboardFilterParams, { rejectWithValue }) => {
     try {
       const response = await axios.get<DashboardResponse>(
         '/api/v1/statistics/dashboard',
         { params }
       );
-      
+
       if (response.data.success) {
         return response.data.data;
       } else {
@@ -76,27 +76,27 @@ const dashboardSlice = createSlice({
   name: 'dashboard',
   initialState,
   reducers: {
-    setFilters: (state, action: PayloadAction<Partial<DashboardFilterParams>>) => {
+    setFilters: (state: DashboardState, action: PayloadAction<Partial<DashboardFilterParams>>) => {
       state.filters = { ...state.filters, ...action.payload };
     },
-    resetFilters: (state) => {
+    resetFilters: (state: DashboardState) => {
       state.filters = initialState.filters;
     },
-    clearError: (state) => {
+    clearError: (state: DashboardState) => {
       state.error = null;
     }
   },
-  extraReducers: (builder) => {
+  extraReducers: (builder: ActionReducerMapBuilder<DashboardState>) => {
     builder
-      .addCase(fetchDashboardData.pending, (state) => {
+      .addCase(fetchDashboardData.pending, (state: DashboardState) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchDashboardData.fulfilled, (state, action) => {
+      .addCase(fetchDashboardData.fulfilled, (state: DashboardState, action: PayloadAction<DashboardData>) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(fetchDashboardData.rejected, (state, action) => {
+      .addCase(fetchDashboardData.rejected, (state: DashboardState, action: PayloadAction<string | undefined>) => {
         state.loading = false;
         state.error = action.payload || 'Failed to fetch dashboard data';
       });
