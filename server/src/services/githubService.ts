@@ -7,6 +7,8 @@ const GITHUB_API_BASE_URL = 'https://api.github.com';
 // Repositories to fetch releases from
 const REPOSITORIES = ['stackflow', 'seed-design'];
 
+const allReleaseMemo: ProcessedRelease[] = [];
+
 /**
  * Fetches releases from GitHub API with retry logic and rate limit handling
  * @param owner Repository owner
@@ -111,6 +113,12 @@ function processReleaseData(releases: GitHubRelease[], repository: string): Proc
  */
 export async function fetchAllReleases(): Promise<ProcessedRelease[]> {
   try {
+    if( allReleaseMemo.length > 0) {
+      console.log('Returning cached releases');
+      return allReleaseMemo;
+    }
+
+
     let allProcessedReleases: ProcessedRelease[] = [];
 
     for (const repo of REPOSITORIES) {
