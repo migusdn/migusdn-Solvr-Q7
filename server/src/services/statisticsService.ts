@@ -332,12 +332,5 @@ export function calculateAllStatistics(releases: ProcessedRelease[]) {
 }
 
 export default {
-  calculateYearlyStatistics,
-  calculateMonthlyStatistics,
-  calculateWeeklyStatistics,
-  calculateDailyStatistics,
-  calculateComparisonStatistics,
-  calculateWorkingDaysBetweenReleases,
-  calculateWorkingDayReleaseCount,
   calculateAllStatistics
 };

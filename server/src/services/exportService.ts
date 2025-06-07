@@ -90,7 +90,7 @@ async function processExportJob(exportId: string): Promise<void> {
     exportJobs.set(exportId, job);
 
     // Generate dashboard data based on filters
-    const dashboardData = dashboardService.generateDashboardData(releases, job.params);
+    const dashboardData = await dashboardService.generateDashboardData(releases, job.params);
 
     job.progress = 50;
     exportJobs.set(exportId, job);
@@ -104,7 +104,7 @@ async function processExportJob(exportId: string): Promise<void> {
 
     // Include time series data if requested
     if (job.params.exportOptions.includeTimeSeriesData) {
-      dashboardData.timeSeriesData.forEach(item => {
+      dashboardData.timeSeriesData.forEach((item: any) => {
         csvData.push({
           section: 'Time Series',
           date: item.date,
@@ -120,7 +120,7 @@ async function processExportJob(exportId: string): Promise<void> {
 
     // Include repository breakdown if requested
     if (job.params.exportOptions.includeRepositoryBreakdown) {
-      dashboardData.topRepositories.forEach(item => {
+      dashboardData.topRepositories.forEach((item: any) => {
         csvData.push({
           section: 'Repository Breakdown',
           repository: item.name,
@@ -132,7 +132,7 @@ async function processExportJob(exportId: string): Promise<void> {
 
     // Include release type breakdown if requested
     if (job.params.exportOptions.includeReleaseTypeBreakdown) {
-      dashboardData.releaseTypeBreakdown.forEach(item => {
+      dashboardData.releaseTypeBreakdown.forEach((item: any) => {
         csvData.push({
           section: 'Release Type Breakdown',
           type: item.type,

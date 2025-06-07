@@ -50,9 +50,16 @@ export const fetchDashboardData = createAsyncThunk<
   'dashboard/fetchData',
   async (params: DashboardFilterParams, { rejectWithValue }) => {
     try {
+      // 필터 객체를 JSON 문자열로 변환하여 전송
+      const serializedParams = {
+        ...params,
+        filters: params.filters ? JSON.stringify(params.filters) : undefined,
+        sort: params.sort ? JSON.stringify(params.sort) : undefined
+      };
+
       const response = await axios.get<DashboardResponse>(
         '/api/v1/statistics/dashboard',
-        { params }
+        { params: serializedParams }
       );
 
       if (response.data.success) {

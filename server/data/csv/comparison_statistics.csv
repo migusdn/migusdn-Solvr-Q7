@@ -1,4 +1,4 @@
 metric,stackflow_value,seed_design_value,difference,percentage_difference
-total_releases,30,30,0,0
-avg_releases_per_month,3.3333333333333335,15,-11.666666666666666,-77.77777777777779
-max_releases_in_month,5,20,-15,-75
+total_releases,159,329,-170,-51.671732522796354
+avg_releases_per_month,10.6,19.352941176470587,-8.752941176470587,-45.22796352583586
+max_releases_in_month,44,83,-39,-46.98795180722892

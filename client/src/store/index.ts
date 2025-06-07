@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import dashboardReducer from './dashboard';
 import exportReducer from './export';
+import releaseStatsReducer from './releaseStats';
 
 /**
  * Redux store configuration
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     dashboard: dashboardReducer,
     export: exportReducer,
+    releaseStats: releaseStatsReducer,
   },
 });
 
