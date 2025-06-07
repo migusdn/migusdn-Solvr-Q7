@@ -7,7 +7,6 @@ import TimeSeriesChart from '../TimeSeriesChart/TimeSeriesChart';
 import SummaryStats from '../SummaryStats/SummaryStats';
 import TopRepositoriesChart from '../TopRepositoriesChart/TopRepositoriesChart';
 import ReleaseTypeBreakdown from '../ReleaseTypeBreakdown/ReleaseTypeBreakdown';
-import { ReleaseCommitStats } from '../ReleaseCommitStats';
 
 /**
  * Dashboard component
@@ -81,12 +80,6 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Release commit statistics */}
-          <div className="col-span-1 md:col-span-2 mt-6">
-            <div className="bg-white rounded-lg shadow p-6">
-              <ReleaseCommitStats />
-            </div>
-          </div>
         </div>
       )}
 
