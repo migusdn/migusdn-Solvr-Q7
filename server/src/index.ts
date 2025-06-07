@@ -6,6 +6,8 @@ import runMigration from './db/migrate'
 import { createUserService } from './services/userService'
 import { createRoutes } from './routes'
 import { AppContext } from './types/context'
+import githubService from './services/githubService'
+import csvService from './services/csvService'
 
 // Fastify 인스턴스 생성
 const fastify = Fastify({
@@ -46,6 +48,16 @@ async function start() {
 
     // 서버 시작
     await fastify.listen({ port: env.PORT, host: env.HOST })
+
+    // 서버 시작 시 자동으로 통계 CSV 파일 생성
+    try {
+      console.log('통계 CSV 파일 생성 중...')
+      const releases = await githubService.fetchAllReleases()
+      const csvFiles = await csvService.generateAllCsvFiles(releases)
+      console.log('통계 CSV 파일 생성 완료:', csvFiles)
+    } catch (error) {
+      console.error('통계 CSV 파일 생성 중 오류 발생:', error)
+    }
 
     console.log(`서버가 http://${env.HOST}:${env.PORT} 에서 실행 중입니다.`)
   } catch (error) {
