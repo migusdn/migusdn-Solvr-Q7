@@ -17,6 +17,7 @@ import {
   calculateWorkingDaysBetweenReleases,
   calculateWorkingDayReleaseCount
 } from './statisticsService';
+import { isWorkingDay, parseISODate } from '../utils/dateUtils'
 
 // Define the output directory for CSV files
 const CSV_OUTPUT_DIR = path.join(process.cwd(), 'data', 'csv');
