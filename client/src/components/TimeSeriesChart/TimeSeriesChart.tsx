@@ -19,14 +19,27 @@ interface TimeSeriesChartProps {
 }
 
 /**
+ * Tooltip props interface
+ */
+interface TooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    name: string;
+    value: number;
+    color: string;
+  }>;
+  label?: string;
+}
+
+/**
  * Custom tooltip component for the chart
  */
-const CustomTooltip: React.FC<any> = ({ active, payload, label }) => {
+const CustomTooltip: React.FC<TooltipProps> = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white p-3 border border-gray-200 shadow-md rounded">
         <p className="font-medium text-gray-700">{`날짜: ${label}`}</p>
-        {payload.map((entry: any, index: number) => (
+        {payload.map((entry, index) => (
           <p key={`item-${index}`} style={{ color: entry.color }}>
             {`${entry.name}: ${entry.value}`}
           </p>

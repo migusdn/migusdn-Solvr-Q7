@@ -17,9 +17,25 @@ interface ReleaseTypeBreakdownProps {
 }
 
 /**
+ * Tooltip props interface
+ */
+interface TooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    payload: {
+      type: string;
+      count: number;
+      percentage: number;
+    };
+    color: string;
+  }>;
+  label?: string;
+}
+
+/**
  * Custom tooltip component for the chart
  */
-const CustomTooltip: React.FC<any> = ({ active, payload }) => {
+const CustomTooltip: React.FC<TooltipProps> = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
@@ -40,7 +56,7 @@ const CustomTooltip: React.FC<any> = ({ active, payload }) => {
 const ReleaseTypeBreakdown: React.FC<ReleaseTypeBreakdownProps> = ({ data }) => {
   // Colors for the pie chart
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-  
+
   // Format the data for better display
   const formattedData = data.map(item => ({
     ...item,
@@ -62,7 +78,7 @@ const ReleaseTypeBreakdown: React.FC<ReleaseTypeBreakdownProps> = ({ data }) => 
             nameKey="name"
             label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
           >
-            {formattedData.map((entry, index) => (
+            {formattedData.map((_entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
