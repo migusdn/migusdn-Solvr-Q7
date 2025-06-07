@@ -27,7 +27,7 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
  */
 function filterReleases(releases: ProcessedRelease[], params: DashboardFilterParams): ProcessedRelease[] {
   let filteredReleases = [...releases];
-
+  console.log(params);
   // Filter by date range
   if (params.startDate) {
     const startDate = new Date(params.startDate);
@@ -45,7 +45,7 @@ function filterReleases(releases: ProcessedRelease[], params: DashboardFilterPar
 
   // Filter by repository
   if (params.filters?.repository && params.filters.repository.length > 0) {
-    filteredReleases = filteredReleases.filter(release => 
+    filteredReleases = filteredReleases.filter(release =>
       params.filters!.repository!.includes(release.repository)
     );
   }
@@ -178,6 +178,7 @@ function calculateReleaseTypeBreakdown(releases: ProcessedRelease[]): ReleaseTyp
  * @returns Dashboard data
  */
 export function generateDashboardData(releases: ProcessedRelease[], params: DashboardFilterParams): DashboardData {
+
   // Filter releases based on parameters
   const filteredReleases = filterReleases(releases, params);
 
@@ -210,7 +211,6 @@ export function generateDashboardData(releases: ProcessedRelease[], params: Dash
 export function getDashboardData(releases: ProcessedRelease[], params: DashboardFilterParams): DashboardData {
   // Create a cache key based on the filter parameters
   const cacheKey = JSON.stringify(params);
-  
   // Check if we have cached data and it's still valid
   const cachedData = dashboardCache.get(cacheKey);
   if (cachedData && (Date.now() - cachedData.timestamp) < CACHE_TTL) {

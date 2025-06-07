@@ -9,19 +9,51 @@ import { DashboardFilterParams } from '../types/dashboardTypes';
  * @param reply Fastify reply
  */
 export async function getDashboardData(
-  request: FastifyRequest<{
-    Querystring: DashboardFilterParams
-  }>, 
+  request: FastifyRequest, 
   reply: FastifyReply
 ) {
   try {
-    const params = request.query;
-    
+    // 직렬화된 쿼리 파라미터 처리
+    const rawParams = request.query as Record<string, any>;
+
+    // filters와 sort가 JSON 문자열로 전달되었다면 파싱
+    let filtersObj = {};
+    if (rawParams.filters && typeof rawParams.filters === 'string') {
+      try {
+        filtersObj = JSON.parse(rawParams.filters);
+      } catch (e) {
+        console.error('Failed to parse filters JSON:', e);
+      }
+    }
+
+    let sortObj = undefined;
+    if (rawParams.sort && typeof rawParams.sort === 'string') {
+      try {
+        sortObj = JSON.parse(rawParams.sort);
+      } catch (e) {
+        console.error('Failed to parse sort JSON:', e);
+      }
+    }
+
+    // 파싱된 데이터로 params 객체 생성
+    const params: DashboardFilterParams = {
+      timeframe: rawParams.timeframe as 'daily' | 'weekly' | 'monthly',
+      startDate: rawParams.startDate,
+      endDate: rawParams.endDate,
+      filters: filtersObj as any,
+      sort: sortObj
+    };
+
+
     // Set default timeframe if not provided
     if (!params.timeframe) {
       params.timeframe = 'daily';
     }
-    
+
+    // 필터가 undefined인 경우 빈 객체로 초기화
+    if (!params.filters) {
+      params.filters = {};
+    }
     // Fetch all releases
     const releases = await githubService.fetchAllReleases();
     
