@@ -36,13 +36,16 @@ export interface ProcessedRelease {
   month: number;
   week: number;
   day: number;
+  isWorkingDay?: boolean;
 }
 
 export interface ReleaseStatistics {
   repository: string;
   releaseCount: number;
-  yearlyStats: { year: number; count: number }[];
-  monthlyStats: { year: number; month: number; count: number }[];
-  weeklyStats: { year: number; week: number; count: number }[];
-  dailyStats: { date: string; count: number }[];
+  workingDayReleaseCount: number;
+  yearlyStats: { year: number; count: number; workingDayCount: number }[];
+  monthlyStats: { year: number; month: number; count: number; workingDayCount: number }[];
+  weeklyStats: { year: number; week: number; count: number; workingDayCount: number }[];
+  dailyStats: { date: string; count: number; isWorkingDay: boolean }[];
+  workingDaysBetweenReleases: { releaseTag: string; workingDaysSincePreviousRelease: number }[];
 }
