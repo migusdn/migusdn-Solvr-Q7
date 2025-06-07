@@ -215,6 +215,9 @@ async function calculateSummaryStats(releases: ProcessedRelease[], params?: Dash
 
   // Fetch release statistics for each repository
   try {
+    // Create a map to track processed releases by tag name to avoid double-counting
+    const processedReleaseTags = new Set<string>();
+
     for (const repository of repositories) {
       // Format repository as 'owner/repo'
       const formattedRepo = `daangn/${repository}`;
@@ -226,42 +229,50 @@ async function calculateSummaryStats(releases: ProcessedRelease[], params?: Dash
         ));
 
       if (repoStats && repoStats.releases) {
-        // Aggregate statistics
+        // Aggregate statistics, avoiding double-counting
         repoStats.releases.forEach((release: any) => {
-          totalCommits += release.compareWithPrevious.totalCommits;
-          totalAdditions += release.compareWithPrevious.totalAdditions;
-          totalDeletions += release.compareWithPrevious.totalDeletions;
-          totalFilesChanged += release.compareWithPrevious.totalFilesChanged;
+          // Create a unique identifier for this release
+          const releaseKey = `${repository}-${release.tagName}`;
 
-          // Add to recent releases (limited to 5)
-          if (recentReleases.length < 5) {
-            recentReleases.push({
-              tagName: release.tagName,
-              name: release.name,
-              publishedAt: release.publishedAt,
-              commitCount: release.compareWithPrevious.totalCommits,
-              additions: release.compareWithPrevious.totalAdditions,
-              deletions: release.compareWithPrevious.totalDeletions,
-              filesChanged: release.compareWithPrevious.totalFilesChanged
+          // Only process this release if we haven't seen it before
+          if (!processedReleaseTags.has(releaseKey)) {
+            processedReleaseTags.add(releaseKey);
+
+            totalCommits += release.compareWithPrevious.totalCommits;
+            totalAdditions += release.compareWithPrevious.totalAdditions;
+            totalDeletions += release.compareWithPrevious.totalDeletions;
+            totalFilesChanged += release.compareWithPrevious.totalFilesChanged;
+
+            // Add to recent releases (limited to 5)
+            if (recentReleases.length < 5) {
+              recentReleases.push({
+                tagName: release.tagName,
+                name: release.name,
+                publishedAt: release.publishedAt,
+                commitCount: release.compareWithPrevious.totalCommits,
+                additions: release.compareWithPrevious.totalAdditions,
+                deletions: release.compareWithPrevious.totalDeletions,
+                filesChanged: release.compareWithPrevious.totalFilesChanged
+              });
+            }
+
+            // Aggregate contributor statistics
+            release.compareWithPrevious.authorStats.forEach((author: any) => {
+              const current = contributorMap.get(author.author) || {
+                commits: 0,
+                additions: 0,
+                deletions: 0,
+                filesChanged: 0
+              };
+
+              contributorMap.set(author.author, {
+                commits: current.commits + author.commits,
+                additions: current.additions + author.additions,
+                deletions: current.deletions + author.deletions,
+                filesChanged: current.filesChanged + author.filesChanged
+              });
             });
           }
-
-          // Aggregate contributor statistics
-          release.compareWithPrevious.authorStats.forEach((author: any) => {
-            const current = contributorMap.get(author.author) || {
-              commits: 0,
-              additions: 0,
-              deletions: 0,
-              filesChanged: 0
-            };
-
-            contributorMap.set(author.author, {
-              commits: current.commits + author.commits,
-              additions: current.additions + author.additions,
-              deletions: current.deletions + author.deletions,
-              filesChanged: current.filesChanged + author.filesChanged
-            });
-          });
         });
       }
     }
