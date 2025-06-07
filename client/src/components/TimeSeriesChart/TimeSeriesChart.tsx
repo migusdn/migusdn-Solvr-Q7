@@ -90,8 +90,15 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ data }) => {
             tickFormatter={formatXAxis}
             tick={{ fontSize: 12 }}
           />
-          <YAxis yAxisId="left" />
-          <YAxis yAxisId="right" orientation="right" />
+          <YAxis yAxisId="left"
+            orientation="left"
+            label={{value: '릴리스 수', angle: -90, position: 'insideLeft', fontSize: 12}}
+          />
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+            label={{value: '커밋/기여자 수', angle: -90, position: 'insideRight', fontSize: 12}}
+          />
           <Tooltip content={<CustomTooltip />} />
           <Legend />
           <Line

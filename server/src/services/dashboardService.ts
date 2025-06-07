@@ -61,10 +61,78 @@ function filterReleases(releases: ProcessedRelease[], params: DashboardFilterPar
  * Generates time series data based on timeframe
  * @param releases Filtered releases
  * @param timeframe Timeframe (daily, weekly, monthly)
+ * @param releaseStats Optional repository release stats for commit and contributor counts
  * @returns Array of time series data points
  */
-function generateTimeSeriesData(releases: ProcessedRelease[], timeframe: string): TimeSeriesDataPoint[] {
+function generateTimeSeriesData(
+  releases: ProcessedRelease[], 
+  timeframe: string,
+  releaseStats?: RepositoryReleaseStats[]
+): TimeSeriesDataPoint[] {
   let timeSeriesData: TimeSeriesDataPoint[] = [];
+
+  // Create maps to store commit and contributor counts by date
+  const commitCountByDate = new Map<string, number>();
+  const contributorCountByDate = new Map<string, number>();
+  const contributorsByDate = new Map<string, Set<string>>();
+
+  // Process release stats to extract commit and contributor counts if available
+  if (releaseStats && releaseStats.length > 0) {
+    releaseStats.forEach(repoStats => {
+      repoStats.releases.forEach(release => {
+        const releaseDate = new Date(release.publishedAt);
+        const dateStr = releaseDate.toISOString().split('T')[0]; // YYYY-MM-DD
+
+        // For daily stats
+        const dailyKey = dateStr;
+
+        // For weekly stats
+        const weekDate = new Date(releaseDate);
+        weekDate.setHours(0, 0, 0, 0);
+        weekDate.setDate(weekDate.getDate() + 3 - (weekDate.getDay() + 6) % 7);
+        const week = Math.floor((weekDate.getTime() - new Date(weekDate.getFullYear(), 0, 4).getTime()) / 86400000 / 7) + 1;
+        const weeklyKey = `${releaseDate.getFullYear()}-W${week.toString().padStart(2, '0')}`;
+
+        // For monthly stats
+        const monthlyKey = `${releaseDate.getFullYear()}-${(releaseDate.getMonth() + 1).toString().padStart(2, '0')}`;
+
+        // Determine which key to use based on timeframe
+        let key;
+        switch (timeframe) {
+          case 'daily':
+            key = dailyKey;
+            break;
+          case 'weekly':
+            key = weeklyKey;
+            break;
+          case 'monthly':
+            key = monthlyKey;
+            break;
+          default:
+            key = dailyKey;
+        }
+
+        // Update commit count
+        const currentCommits = commitCountByDate.get(key) || 0;
+        commitCountByDate.set(key, currentCommits + release.compareWithPrevious.totalCommits);
+
+        // Update contributor set
+        if (!contributorsByDate.has(key)) {
+          contributorsByDate.set(key, new Set<string>());
+        }
+
+        // Add all contributors from this release
+        release.compareWithPrevious.authorStats.forEach(author => {
+          contributorsByDate.get(key)?.add(author.author);
+        });
+      });
+    });
+
+    // Convert contributor sets to counts
+    contributorsByDate.forEach((contributors, key) => {
+      contributorCountByDate.set(key, contributors.size);
+    });
+  }
 
   switch (timeframe) {
     case 'daily':
@@ -72,27 +140,33 @@ function generateTimeSeriesData(releases: ProcessedRelease[], timeframe: string)
       timeSeriesData = dailyStats.map(stat => ({
         date: stat.date,
         releaseCount: stat.release_count,
-        commitCount: 0, // This would require additional data from GitHub API
-        contributorCount: 0 // This would require additional data from GitHub API
+        commitCount: commitCountByDate.get(stat.date) || 0,
+        contributorCount: contributorCountByDate.get(stat.date) || 0
       }));
       break;
     case 'weekly':
       const weeklyStats = calculateWeeklyStatistics(releases);
-      timeSeriesData = weeklyStats.map(stat => ({
-        date: `${stat.year}-W${stat.week.toString().padStart(2, '0')}`,
-        releaseCount: stat.release_count,
-        commitCount: 0, // This would require additional data from GitHub API
-        contributorCount: 0 // This would require additional data from GitHub API
-      }));
+      timeSeriesData = weeklyStats.map(stat => {
+        const weekKey = `${stat.year}-W${stat.week.toString().padStart(2, '0')}`;
+        return {
+          date: weekKey,
+          releaseCount: stat.release_count,
+          commitCount: commitCountByDate.get(weekKey) || 0,
+          contributorCount: contributorCountByDate.get(weekKey) || 0
+        };
+      });
       break;
     case 'monthly':
       const monthlyStats = calculateMonthlyStatistics(releases);
-      timeSeriesData = monthlyStats.map(stat => ({
-        date: `${stat.year}-${stat.month.toString().padStart(2, '0')}`,
-        releaseCount: stat.release_count,
-        commitCount: 0, // This would require additional data from GitHub API
-        contributorCount: 0 // This would require additional data from GitHub API
-      }));
+      timeSeriesData = monthlyStats.map(stat => {
+        const monthKey = `${stat.year}-${stat.month.toString().padStart(2, '0')}`;
+        return {
+          date: monthKey,
+          releaseCount: stat.release_count,
+          commitCount: commitCountByDate.get(monthKey) || 0,
+          contributorCount: contributorCountByDate.get(monthKey) || 0
+        };
+      });
       break;
     default:
       // Default to daily if timeframe is not recognized
@@ -100,8 +174,8 @@ function generateTimeSeriesData(releases: ProcessedRelease[], timeframe: string)
       timeSeriesData = defaultDailyStats.map(stat => ({
         date: stat.date,
         releaseCount: stat.release_count,
-        commitCount: 0,
-        contributorCount: 0
+        commitCount: commitCountByDate.get(stat.date) || 0,
+        contributorCount: contributorCountByDate.get(stat.date) || 0
       }));
   }
 
@@ -113,7 +187,7 @@ function generateTimeSeriesData(releases: ProcessedRelease[], timeframe: string)
  * @param releases Filtered releases
  * @returns Summary statistics
  */
-async function calculateSummaryStats(releases: ProcessedRelease[]): Promise<SummaryStats> {
+async function calculateSummaryStats(releases: ProcessedRelease[], params?: DashboardFilterParams): Promise<SummaryStats> {
   const totalReleases = releases.length;
 
   // Calculate average time between releases
@@ -145,7 +219,11 @@ async function calculateSummaryStats(releases: ProcessedRelease[]): Promise<Summ
       // Format repository as 'owner/repo'
       const formattedRepo = `daangn/${repository}`;
       const repoStats = await import('../services/githubService.js')
-        .then(module => module.default.fetchRepositoryReleaseStats(formattedRepo));
+        .then(module => module.default.fetchRepositoryReleaseStats(
+          formattedRepo,
+          params?.startDate,
+          params?.endDate
+        ));
 
       if (repoStats && repoStats.releases) {
         // Aggregate statistics
@@ -245,16 +323,38 @@ async function calculateSummaryStats(releases: ProcessedRelease[]): Promise<Summ
 /**
  * Calculates top repositories by release count
  * @param releases Filtered releases
+ * @param releaseStats Optional repository release stats for commit counts
  * @returns Array of top repositories
  */
-function calculateTopRepositories(releases: ProcessedRelease[]): TopRepository[] {
+function calculateTopRepositories(
+  releases: ProcessedRelease[], 
+  releaseStats?: RepositoryReleaseStats[]
+): TopRepository[] {
   const repoMap = new Map<string, { releaseCount: number; commitCount: number }>();
 
+  // Initialize repo map with release counts
   releases.forEach(release => {
     const repo = repoMap.get(release.repository) || { releaseCount: 0, commitCount: 0 };
     repo.releaseCount += 1;
     repoMap.set(release.repository, repo);
   });
+
+  // Add commit counts from release stats if available
+  if (releaseStats && releaseStats.length > 0) {
+    releaseStats.forEach(repoStat => {
+      const repoName = repoStat.repository;
+      if (repoMap.has(repoName)) {
+        let totalCommits = 0;
+        repoStat.releases.forEach(release => {
+          totalCommits += release.compareWithPrevious.totalCommits;
+        });
+
+        const repo = repoMap.get(repoName)!;
+        repo.commitCount = totalCommits;
+        repoMap.set(repoName, repo);
+      }
+    });
+  }
 
   return Array.from(repoMap.entries()).map(([name, stats]) => ({
     name,
@@ -293,18 +393,6 @@ export async function generateDashboardData(releases: ProcessedRelease[], params
   // Filter releases based on parameters
   const filteredReleases = filterReleases(releases, params);
 
-  // Generate time series data
-  const timeSeriesData = generateTimeSeriesData(filteredReleases, params.timeframe);
-
-  // Calculate summary statistics (now async)
-  const summaryStats = await calculateSummaryStats(filteredReleases);
-  console.log(summaryStats);
-  // Calculate top repositories
-  const topRepositories = calculateTopRepositories(filteredReleases);
-
-  // Calculate release type breakdown
-  const releaseTypeBreakdown = calculateReleaseTypeBreakdown(filteredReleases);
-
   // Fetch release stats for all selected repositories
   let releaseStats = undefined;
   if (params.filters?.repository && params.filters.repository.length > 0) {
@@ -337,6 +425,18 @@ export async function generateDashboardData(releases: ProcessedRelease[], params
       // Continue without release stats if there's an error
     }
   }
+
+  // Generate time series data with release stats
+  const timeSeriesData = generateTimeSeriesData(filteredReleases, params.timeframe, releaseStats);
+
+  // Calculate summary statistics (now async)
+  const summaryStats = await calculateSummaryStats(filteredReleases, params);
+  console.log(summaryStats);
+  // Calculate top repositories with commit counts from release stats
+  const topRepositories = calculateTopRepositories(filteredReleases, releaseStats);
+
+  // Calculate release type breakdown
+  const releaseTypeBreakdown = calculateReleaseTypeBreakdown(filteredReleases);
 
   return {
     timeSeriesData,

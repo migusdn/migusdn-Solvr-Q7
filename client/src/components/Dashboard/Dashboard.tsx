@@ -15,10 +15,10 @@ const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const { data, filters, loading, error } = useAppSelector((state: RootState) => state.dashboard);
 
-  // Fetch dashboard data on component mount and when filters change
+  // Fetch dashboard data only on component mount
   useEffect(() => {
     dispatch(fetchDashboardData(filters));
-  }, [dispatch, filters]);
+  }, [dispatch]);
 
   return (
     <div className="container mx-auto px-4 py-8">
