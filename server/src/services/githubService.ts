@@ -116,7 +116,7 @@ export async function fetchAllReleases(): Promise<ProcessedRelease[]> {
     for (const repo of REPOSITORIES) {
       // Assuming both repositories are owned by the same organization
       // In a real-world scenario, you might want to configure this per repository
-      const owner = 'stackflow-io'; // Replace with the actual organization name
+      const owner = 'daangn'; // Organization name for the target repositories
       const releases = await fetchRepositoryReleases(owner, repo);
       const processedReleases = processReleaseData(releases, repo);
       allProcessedReleases = [...allProcessedReleases, ...processedReleases];
