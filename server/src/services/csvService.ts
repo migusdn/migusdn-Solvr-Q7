@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { createObjectCsvWriter } from 'csv-writer';
-import { ProcessedRelease } from '../types/githubTypes';
+import { ProcessedRelease, ReleaseDetails } from '../types/githubTypes';
 import {
   YearlyStatistic,
   MonthlyStatistic,
@@ -228,11 +228,57 @@ export async function generateWorkingDaysBetweenReleasesCsv(releases: ProcessedR
 }
 
 /**
+ * Generates a CSV file with release details
+ * @param releaseDetails Array of release details
+ * @returns Path to the generated CSV file
+ */
+export async function generateReleaseDetailsCsv(releaseDetails: ReleaseDetails[]): Promise<string> {
+  ensureOutputDirExists();
+
+  const filePath = path.join(CSV_OUTPUT_DIR, 'release_details.csv');
+
+  const csvWriter = createObjectCsvWriter({
+    path: filePath,
+    header: [
+      { id: 'repository_name', title: 'repository_name' },
+      { id: 'release_id', title: 'release_id' },
+      { id: 'tag_name', title: 'tag_name' },
+      { id: 'release_name', title: 'release_name' },
+      { id: 'html_url', title: 'html_url' },
+      { id: 'is_draft', title: 'is_draft' },
+      { id: 'is_prerelease', title: 'is_prerelease' },
+      { id: 'created_at', title: 'created_at' },
+      { id: 'published_at', title: 'published_at' },
+      { id: 'author_login', title: 'author_login' },
+      { id: 'author_type', title: 'author_type' },
+      { id: 'body_content', title: 'body_content' },
+      { id: 'target_commitish', title: 'target_commitish' },
+      { id: 'assets_count', title: 'assets_count' },
+      { id: 'tarball_url', title: 'tarball_url' },
+      { id: 'zipball_url', title: 'zipball_url' },
+      { id: 'published_year', title: 'published_year' },
+      { id: 'published_month', title: 'published_month' },
+      { id: 'published_day', title: 'published_day' },
+      { id: 'published_week', title: 'published_week' },
+      { id: 'body_length', title: 'body_length' }
+    ]
+  });
+
+  await csvWriter.writeRecords(releaseDetails);
+
+  return filePath;
+}
+
+/**
  * Generates all CSV files from the processed release data
  * @param releases Processed release data
+ * @param releaseDetails Optional release details data
  * @returns Object with paths to all generated CSV files
  */
-export async function generateAllCsvFiles(releases: ProcessedRelease[]): Promise<Record<string, string>> {
+export async function generateAllCsvFiles(
+  releases: ProcessedRelease[],
+  releaseDetails?: ReleaseDetails[]
+): Promise<Record<string, string>> {
   const allReleasesCsvPath = await generateAllReleasesCsv(releases);
   const yearlyStatsCsvPath = await generateYearlyStatisticsCsv(releases);
   const monthlyStatsCsvPath = await generateMonthlyStatisticsCsv(releases);
@@ -241,7 +287,7 @@ export async function generateAllCsvFiles(releases: ProcessedRelease[]): Promise
   const comparisonStatsCsvPath = await generateComparisonStatisticsCsv(releases);
   const workingDaysBetweenReleasesCsvPath = await generateWorkingDaysBetweenReleasesCsv(releases);
 
-  return {
+  const result: Record<string, string> = {
     allReleases: allReleasesCsvPath,
     yearlyStats: yearlyStatsCsvPath,
     monthlyStats: monthlyStatsCsvPath,
@@ -250,6 +296,14 @@ export async function generateAllCsvFiles(releases: ProcessedRelease[]): Promise
     comparisonStats: comparisonStatsCsvPath,
     workingDaysBetweenReleases: workingDaysBetweenReleasesCsvPath
   };
+
+  // Generate release details CSV if releaseDetails are provided
+  if (releaseDetails && releaseDetails.length > 0) {
+    const releaseDetailsCsvPath = await generateReleaseDetailsCsv(releaseDetails);
+    result.releaseDetails = releaseDetailsCsvPath;
+  }
+
+  return result;
 }
 
 export default {
@@ -260,5 +314,6 @@ export default {
   generateDailyStatisticsCsv,
   generateComparisonStatisticsCsv,
   generateWorkingDaysBetweenReleasesCsv,
+  generateReleaseDetailsCsv,
   generateAllCsvFiles
 };

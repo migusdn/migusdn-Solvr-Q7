@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GitHubRelease, ProcessedRelease } from '../types/githubTypes';
+import { GitHubRelease, ProcessedRelease, ReleaseDetails } from '../types/githubTypes';
 
 // GitHub API base URL
 const GITHUB_API_BASE_URL = 'https://api.github.com';
@@ -129,6 +129,71 @@ export async function fetchAllReleases(): Promise<ProcessedRelease[]> {
   }
 }
 
+/**
+ * Converts a GitHubRelease to a ReleaseDetails object
+ * @param release Raw GitHub release data
+ * @param repository Repository name
+ * @returns ReleaseDetails object
+ */
+function convertToReleaseDetails(release: GitHubRelease, repository: string): ReleaseDetails {
+  const publishedDate = new Date(release.published_at);
+  const year = publishedDate.getFullYear();
+  const month = publishedDate.getMonth() + 1; // JavaScript months are 0-indexed
+
+  // Calculate week number (ISO week)
+  const date = new Date(publishedDate);
+  date.setHours(0, 0, 0, 0);
+  date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+  const week = Math.floor((date.getTime() - new Date(date.getFullYear(), 0, 4).getTime()) / 86400000 / 7) + 1;
+
+  return {
+    repository_name: repository,
+    release_id: release.id,
+    tag_name: release.tag_name,
+    release_name: release.name || release.tag_name,
+    html_url: release.html_url,
+    is_draft: release.draft,
+    is_prerelease: release.prerelease,
+    created_at: release.created_at,
+    published_at: release.published_at,
+    author_login: release.author.login,
+    author_type: 'User', // Assuming all authors are users for simplicity
+    body_content: release.body,
+    target_commitish: release.target_commitish,
+    assets_count: release.assets.length,
+    tarball_url: release.tarball_url,
+    zipball_url: release.zipball_url,
+    published_year: year,
+    published_month: month,
+    published_day: publishedDate.getDate(),
+    published_week: week,
+    body_length: release.body ? release.body.length : 0
+  };
+}
+
+/**
+ * Fetches all releases and converts them to ReleaseDetails objects
+ * @returns Array of ReleaseDetails objects
+ */
+export async function fetchAllReleaseDetails(): Promise<ReleaseDetails[]> {
+  try {
+    let allReleaseDetails: ReleaseDetails[] = [];
+
+    for (const repo of REPOSITORIES) {
+      const owner = 'daangn';
+      const releases = await fetchRepositoryReleases(owner, repo);
+      const releaseDetails = releases.map(release => convertToReleaseDetails(release, repo));
+      allReleaseDetails = [...allReleaseDetails, ...releaseDetails];
+    }
+
+    return allReleaseDetails;
+  } catch (error: any) {
+    console.error('Error fetching all release details:', error.message);
+    throw new Error(`Failed to fetch all release details: ${error.message}`);
+  }
+}
+
 export default {
-  fetchAllReleases
+  fetchAllReleases,
+  fetchAllReleaseDetails
 };
