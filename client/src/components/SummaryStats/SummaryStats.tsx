@@ -12,11 +12,21 @@ interface SummaryStatsProps {
  * SummaryStats component
  */
 const SummaryStats: React.FC<SummaryStatsProps> = ({ stats }) => {
+  // Format date
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
+
   return (
     <div className="bg-white rounded-lg shadow p-6">
       <h2 className="text-xl font-semibold mb-4">요약 통계</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
         {/* Total Releases */}
         <div className="bg-blue-50 rounded-lg p-4">
           <div className="text-blue-500 text-sm font-medium uppercase tracking-wide">
@@ -33,7 +43,7 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ stats }) => {
             </div>
           </div>
         </div>
-        
+
         {/* Total Commits */}
         <div className="bg-green-50 rounded-lg p-4">
           <div className="text-green-500 text-sm font-medium uppercase tracking-wide">
@@ -50,7 +60,7 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ stats }) => {
             </div>
           </div>
         </div>
-        
+
         {/* Total Contributors */}
         <div className="bg-purple-50 rounded-lg p-4">
           <div className="text-purple-500 text-sm font-medium uppercase tracking-wide">
@@ -67,7 +77,45 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ stats }) => {
             </div>
           </div>
         </div>
-        
+
+        {/*/!* Total Code Additions *!/*/}
+        {/*{stats.totalAdditions !== undefined && (*/}
+        {/*  <div className="bg-emerald-50 rounded-lg p-4">*/}
+        {/*    <div className="text-emerald-500 text-sm font-medium uppercase tracking-wide">*/}
+        {/*      추가된 코드*/}
+        {/*    </div>*/}
+        {/*    <div className="mt-2 flex justify-between items-end">*/}
+        {/*      <div className="text-3xl font-bold text-emerald-700">*/}
+        {/*        {stats.totalAdditions.toLocaleString()}*/}
+        {/*      </div>*/}
+        {/*      <div className="text-emerald-500">*/}
+        {/*        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">*/}
+        {/*          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />*/}
+        {/*        </svg>*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*)}*/}
+
+        {/*/!* Total Code Deletions *!/*/}
+        {/*{stats.totalDeletions !== undefined && (*/}
+        {/*  <div className="bg-rose-50 rounded-lg p-4">*/}
+        {/*    <div className="text-rose-500 text-sm font-medium uppercase tracking-wide">*/}
+        {/*      삭제된 코드*/}
+        {/*    </div>*/}
+        {/*    <div className="mt-2 flex justify-between items-end">*/}
+        {/*      <div className="text-3xl font-bold text-rose-700">*/}
+        {/*        {stats.totalDeletions.toLocaleString()}*/}
+        {/*      </div>*/}
+        {/*      <div className="text-rose-500">*/}
+        {/*        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">*/}
+        {/*          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />*/}
+        {/*        </svg>*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*)}*/}
+
         {/* Average Commits Per Release */}
         <div className="bg-yellow-50 rounded-lg p-4">
           <div className="text-yellow-500 text-sm font-medium uppercase tracking-wide">
@@ -84,7 +132,7 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ stats }) => {
             </div>
           </div>
         </div>
-        
+
         {/* Average Time to Release */}
         <div className="bg-red-50 rounded-lg p-4">
           <div className="text-red-500 text-sm font-medium uppercase tracking-wide">
@@ -102,6 +150,64 @@ const SummaryStats: React.FC<SummaryStatsProps> = ({ stats }) => {
           </div>
         </div>
       </div>
+
+      {/* Recent Releases */}
+      {stats.recentReleases && stats.recentReleases.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <h3 className="text-lg font-medium mb-3">최근 릴리스</h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead>
+                  <tr>
+                    <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">릴리스</th>
+                    <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider py-2">날짜</th>
+                    <th className="text-right text-xs font-medium text-gray-500 uppercase tracking-wider py-2">커밋</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {stats.recentReleases.map(release => (
+                    <tr key={release.tagName}>
+                      <td className="py-2">
+                        <div className="font-medium">{release.name}</div>
+                        <div className="text-sm text-gray-500">{release.tagName}</div>
+                      </td>
+                      <td className="py-2">{formatDate(release.publishedAt)}</td>
+                      <td className="text-right py-2">{release.commitCount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Top Contributors */}
+          {stats.topContributors && stats.topContributors.length > 0 && (
+            <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <h3 className="text-lg font-medium mb-3">주요 기여자</h3>
+              <div className="space-y-3">
+                {stats.topContributors.slice(0, 5).map(contributor => (
+                  <div key={contributor.author} className="flex items-center">
+                    <div className="w-1/4 truncate">{contributor.author}</div>
+                    <div className="w-3/4">
+                      <div className="relative h-4 bg-gray-200 rounded-full overflow-hidden">
+                        <div 
+                          className="absolute top-0 left-0 h-full bg-blue-500"
+                          style={{ width: `${contributor.contributionPercentage}%` }}
+                        />
+                      </div>
+                      <div className="flex justify-between text-xs mt-1">
+                        <span>{contributor.commits}개 커밋</span>
+                        <span>{contributor.contributionPercentage.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

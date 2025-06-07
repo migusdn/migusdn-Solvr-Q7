@@ -26,6 +26,7 @@ export interface GitHubRelease {
 }
 
 export interface ProcessedRelease {
+  owner: string;
   repository: string;
   tag_name: string;
   name: string;
@@ -73,5 +74,42 @@ export interface ReleaseDetails {
   body_length: number; // 릴리즈 노트 본문의 글자 수
 }
 
+/**
+ * 작성자별 커밋 통계 인터페이스
+ */
+export interface AuthorCommitStats {
+  author: string;        // 작성자 이름 또는 아이디
+  commits: number;       // 커밋 수
+}
 
+/**
+ * 릴리즈 비교 통계 인터페이스
+ */
+export interface ReleaseComparisonStats {
+  tagName: string;           // 릴리즈 태그 이름
+  previousTagName: string;   // 비교 대상인 이전 릴리즈 태그 이름
+  totalCommits: number;      // 총 커밋 수
+  totalAdditions: number;    // 총 추가된 코드 라인 수
+  totalDeletions: number;    // 총 삭제된 코드 라인 수
+  totalFilesChanged: number; // 총 변경된 파일 수
+  authorStats: AuthorCommitStats[]; // 작성자별 통계
+}
 
+/**
+ * 저장소 릴리즈 통계 인터페이스
+ */
+export interface RepositoryReleaseStats {
+  repository: string;                // 저장소 이름 (owner/repo 형식)
+  releases: {
+    tagName: string;
+    name: string;
+    publishedAt: string;
+    compareWithPrevious: {
+      totalCommits: number;
+      totalAdditions: number;
+      totalDeletions: number;
+      totalFilesChanged: number;
+      authorStats: AuthorCommitStats[];
+    }
+  }[];
+}

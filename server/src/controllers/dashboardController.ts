@@ -54,12 +54,16 @@ export async function getDashboardData(
     if (!params.filters) {
       params.filters = {};
     }
+    if(!params.filters.repository) {
+      params.filters.repository = ['daangn/stackflow', 'daangn/seed-design'];
+    }
+
     // Fetch all releases
     const releases = await githubService.fetchAllReleases();
-    
-    // Generate dashboard data
-    const dashboardData = dashboardService.getDashboardData(releases, params);
-    
+
+    // Generate dashboard data (now async)
+    const dashboardData = await dashboardService.getDashboardData(releases, params);
+
     return reply.code(200).send({
       success: true,
       data: dashboardData
@@ -85,7 +89,7 @@ export async function clearDashboardCache(
 ) {
   try {
     dashboardService.clearDashboardCache();
-    
+
     return reply.code(200).send({
       success: true,
       message: 'Dashboard cache cleared successfully'

@@ -38,6 +38,27 @@ export interface SummaryStats {
   totalContributors: number;
   averageCommitsPerRelease: number;
   averageTimeToRelease: number;
+  // Extended statistics for release data
+  totalAdditions?: number;
+  totalDeletions?: number;
+  totalFilesChanged?: number;
+  recentReleases?: {
+    tagName: string;
+    name: string;
+    publishedAt: string;
+    commitCount: number;
+    additions: number;
+    deletions: number;
+    filesChanged: number;
+  }[];
+  topContributors?: {
+    author: string;
+    commits: number;
+    additions: number;
+    deletions: number;
+    filesChanged: number;
+    contributionPercentage: number;
+  }[];
 }
 
 /**

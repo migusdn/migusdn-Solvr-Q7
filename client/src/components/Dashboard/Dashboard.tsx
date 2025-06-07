@@ -7,8 +7,7 @@ import TimeSeriesChart from '../TimeSeriesChart/TimeSeriesChart';
 import SummaryStats from '../SummaryStats/SummaryStats';
 import TopRepositoriesChart from '../TopRepositoriesChart/TopRepositoriesChart';
 import ReleaseTypeBreakdown from '../ReleaseTypeBreakdown/ReleaseTypeBreakdown';
-import ExportButton from '../ExportButton/ExportButton';
-import ExportProgressModal from '../ExportProgressModal/ExportProgressModal';
+import { ReleaseCommitStats } from '../ReleaseCommitStats';
 
 /**
  * Dashboard component
@@ -26,7 +25,6 @@ const Dashboard: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">GitHub 릴리스 대시보드</h1>
-        <ExportButton />
       </div>
 
       {/* Filters */}
@@ -57,6 +55,8 @@ const Dashboard: React.FC = () => {
             <SummaryStats stats={data.summaryStats} />
           </div>
 
+
+
           {/* Time series chart */}
           <div className="col-span-1 md:col-span-2">
             <div className="bg-white rounded-lg shadow p-6">
@@ -80,11 +80,18 @@ const Dashboard: React.FC = () => {
               <ReleaseTypeBreakdown data={data.releaseTypeBreakdown} />
             </div>
           </div>
+
+          {/* Release commit statistics */}
+          <div className="col-span-1 md:col-span-2 mt-6">
+            <div className="bg-white rounded-lg shadow p-6">
+              <ReleaseCommitStats />
+            </div>
+          </div>
         </div>
       )}
 
       {/* Export Progress Modal */}
-      <ExportProgressModal />
+      {/*<ExportProgressModal />*/}
     </div>
   );
 };
