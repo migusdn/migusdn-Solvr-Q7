@@ -8,11 +8,14 @@ import {
   WeeklyStatistic,
   DailyStatistic,
   ComparisonStatistic,
+  WorkingDaysBetweenReleasesStatistic,
   calculateYearlyStatistics,
   calculateMonthlyStatistics,
   calculateWeeklyStatistics,
   calculateDailyStatistics,
-  calculateComparisonStatistics
+  calculateComparisonStatistics,
+  calculateWorkingDaysBetweenReleases,
+  calculateWorkingDayReleaseCount
 } from './statisticsService';
 
 // Define the output directory for CSV files
@@ -34,9 +37,19 @@ function ensureOutputDirExists() {
  */
 export async function generateAllReleasesCsv(releases: ProcessedRelease[]): Promise<string> {
   ensureOutputDirExists();
-  
+
   const filePath = path.join(CSV_OUTPUT_DIR, 'all_releases.csv');
-  
+
+  // Process releases to add working day flag
+  const processedReleases = releases.map(release => {
+    const releaseDate = parseISODate(release.published_at);
+    const isWorkDay = isWorkingDay(releaseDate);
+    return {
+      ...release,
+      is_working_day: isWorkDay
+    };
+  });
+
   const csvWriter = createObjectCsvWriter({
     path: filePath,
     header: [
@@ -45,19 +58,13 @@ export async function generateAllReleasesCsv(releases: ProcessedRelease[]): Prom
       { id: 'name', title: 'name' },
       { id: 'published_at', title: 'published_at' },
       { id: 'created_at', title: 'created_at' },
-      { id: 'author', title: 'author' }
+      { id: 'author', title: 'author' },
+      { id: 'is_working_day', title: 'is_working_day' }
     ]
   });
-  
-  await csvWriter.writeRecords(releases.map(release => ({
-    repository: release.repository,
-    tag_name: release.tag_name,
-    name: release.name,
-    published_at: release.published_at,
-    created_at: release.created_at,
-    author: release.author
-  })));
-  
+
+  await csvWriter.writeRecords(processedReleases);
+
   return filePath;
 }
 
@@ -68,21 +75,22 @@ export async function generateAllReleasesCsv(releases: ProcessedRelease[]): Prom
  */
 export async function generateYearlyStatisticsCsv(releases: ProcessedRelease[]): Promise<string> {
   ensureOutputDirExists();
-  
+
   const yearlyStats = calculateYearlyStatistics(releases);
   const filePath = path.join(CSV_OUTPUT_DIR, 'yearly_statistics.csv');
-  
+
   const csvWriter = createObjectCsvWriter({
     path: filePath,
     header: [
       { id: 'repository', title: 'repository' },
       { id: 'year', title: 'year' },
-      { id: 'release_count', title: 'release_count' }
+      { id: 'release_count', title: 'release_count' },
+      { id: 'working_day_count', title: 'working_day_count' }
     ]
   });
-  
+
   await csvWriter.writeRecords(yearlyStats);
-  
+
   return filePath;
 }
 
@@ -93,22 +101,23 @@ export async function generateYearlyStatisticsCsv(releases: ProcessedRelease[]):
  */
 export async function generateMonthlyStatisticsCsv(releases: ProcessedRelease[]): Promise<string> {
   ensureOutputDirExists();
-  
+
   const monthlyStats = calculateMonthlyStatistics(releases);
   const filePath = path.join(CSV_OUTPUT_DIR, 'monthly_statistics.csv');
-  
+
   const csvWriter = createObjectCsvWriter({
     path: filePath,
     header: [
       { id: 'repository', title: 'repository' },
       { id: 'year', title: 'year' },
       { id: 'month', title: 'month' },
-      { id: 'release_count', title: 'release_count' }
+      { id: 'release_count', title: 'release_count' },
+      { id: 'working_day_count', title: 'working_day_count' }
     ]
   });
-  
+
   await csvWriter.writeRecords(monthlyStats);
-  
+
   return filePath;
 }
 
@@ -119,22 +128,23 @@ export async function generateMonthlyStatisticsCsv(releases: ProcessedRelease[])
  */
 export async function generateWeeklyStatisticsCsv(releases: ProcessedRelease[]): Promise<string> {
   ensureOutputDirExists();
-  
+
   const weeklyStats = calculateWeeklyStatistics(releases);
   const filePath = path.join(CSV_OUTPUT_DIR, 'weekly_statistics.csv');
-  
+
   const csvWriter = createObjectCsvWriter({
     path: filePath,
     header: [
       { id: 'repository', title: 'repository' },
       { id: 'year', title: 'year' },
       { id: 'week', title: 'week' },
-      { id: 'release_count', title: 'release_count' }
+      { id: 'release_count', title: 'release_count' },
+      { id: 'working_day_count', title: 'working_day_count' }
     ]
   });
-  
+
   await csvWriter.writeRecords(weeklyStats);
-  
+
   return filePath;
 }
 
@@ -145,21 +155,22 @@ export async function generateWeeklyStatisticsCsv(releases: ProcessedRelease[]):
  */
 export async function generateDailyStatisticsCsv(releases: ProcessedRelease[]): Promise<string> {
   ensureOutputDirExists();
-  
+
   const dailyStats = calculateDailyStatistics(releases);
   const filePath = path.join(CSV_OUTPUT_DIR, 'daily_statistics.csv');
-  
+
   const csvWriter = createObjectCsvWriter({
     path: filePath,
     header: [
       { id: 'repository', title: 'repository' },
       { id: 'date', title: 'date' },
-      { id: 'release_count', title: 'release_count' }
+      { id: 'release_count', title: 'release_count' },
+      { id: 'is_working_day', title: 'is_working_day' }
     ]
   });
-  
+
   await csvWriter.writeRecords(dailyStats);
-  
+
   return filePath;
 }
 
@@ -170,10 +181,10 @@ export async function generateDailyStatisticsCsv(releases: ProcessedRelease[]): 
  */
 export async function generateComparisonStatisticsCsv(releases: ProcessedRelease[]): Promise<string> {
   ensureOutputDirExists();
-  
+
   const comparisonStats = calculateComparisonStatistics(releases);
   const filePath = path.join(CSV_OUTPUT_DIR, 'comparison_statistics.csv');
-  
+
   const csvWriter = createObjectCsvWriter({
     path: filePath,
     header: [
@@ -184,9 +195,34 @@ export async function generateComparisonStatisticsCsv(releases: ProcessedRelease
       { id: 'percentage_difference', title: 'percentage_difference' }
     ]
   });
-  
+
   await csvWriter.writeRecords(comparisonStats);
-  
+
+  return filePath;
+}
+
+/**
+ * Generates a CSV file with working days between releases statistics
+ * @param releases Processed release data
+ * @returns Path to the generated CSV file
+ */
+export async function generateWorkingDaysBetweenReleasesCsv(releases: ProcessedRelease[]): Promise<string> {
+  ensureOutputDirExists();
+
+  const workingDaysBetweenReleases = calculateWorkingDaysBetweenReleases(releases);
+  const filePath = path.join(CSV_OUTPUT_DIR, 'working_days_between_releases.csv');
+
+  const csvWriter = createObjectCsvWriter({
+    path: filePath,
+    header: [
+      { id: 'repository', title: 'repository' },
+      { id: 'release_tag', title: 'release_tag' },
+      { id: 'working_days_since_previous_release', title: 'working_days_since_previous_release' }
+    ]
+  });
+
+  await csvWriter.writeRecords(workingDaysBetweenReleases);
+
   return filePath;
 }
 
@@ -202,14 +238,16 @@ export async function generateAllCsvFiles(releases: ProcessedRelease[]): Promise
   const weeklyStatsCsvPath = await generateWeeklyStatisticsCsv(releases);
   const dailyStatsCsvPath = await generateDailyStatisticsCsv(releases);
   const comparisonStatsCsvPath = await generateComparisonStatisticsCsv(releases);
-  
+  const workingDaysBetweenReleasesCsvPath = await generateWorkingDaysBetweenReleasesCsv(releases);
+
   return {
     allReleases: allReleasesCsvPath,
     yearlyStats: yearlyStatsCsvPath,
     monthlyStats: monthlyStatsCsvPath,
     weeklyStats: weeklyStatsCsvPath,
     dailyStats: dailyStatsCsvPath,
-    comparisonStats: comparisonStatsCsvPath
+    comparisonStats: comparisonStatsCsvPath,
+    workingDaysBetweenReleases: workingDaysBetweenReleasesCsvPath
   };
 }
 
@@ -220,5 +258,6 @@ export default {
   generateWeeklyStatisticsCsv,
   generateDailyStatisticsCsv,
   generateComparisonStatisticsCsv,
+  generateWorkingDaysBetweenReleasesCsv,
   generateAllCsvFiles
 };
